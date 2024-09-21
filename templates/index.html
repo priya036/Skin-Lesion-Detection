@@ -8,7 +8,6 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-
   <link href="../static/assets/favicon.ico" rel="icon">
   <link href="../static/assets/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -32,35 +31,35 @@
 
 </head>
 <style>
-  html{
+  html {
     background-color: rgba(var(--default-color-rgb), 0.05);
   }
-.user-profile {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #000;
 
-}
+  .user-profile {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
 
-.user-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-  margin-top: -7px;
-  filter: invert(1) brightness(1) !important; 
-}
+  }
 
-.logout-icon {
-  width: 25px;
-  height: 19px;
-  margin-right: -60px;
-  margin-top: -7px;
-  filter: invert(1) brightness(1) !important; 
-}
+  .user-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    margin-top: -7px;
+    filter: invert(1) brightness(1) !important;
+  }
 
-
+  .logout-icon {
+    width: 25px;
+    height: 19px;
+    margin-right: -60px;
+    margin-top: -7px;
+    filter: invert(1) brightness(1) !important;
+  }
 </style>
+
 <body class="contact-page">
 
   <header id="header" class="header d-flex align-items-center fixed-top">
@@ -69,7 +68,7 @@
       <a href="index.html" class="logo d-flex align-items-center">
 
         <h1 class="sitename">Derma Lens</h1> <span>.</span>
-        
+
       </a>
       <nav id="navmenu" class="navmenu">
         <ul>
@@ -77,12 +76,14 @@
           <li><a href="{{url_for('index')}}">Upload</a></li>
           <li>
             <a href="#" class="user-profile">
-              <img src="{{ url_for('static', filename='../static/assets/user-icon.png') }}" alt="User Icon" class="user-icon">
+              <img src="{{ url_for('static', filename='../static/assets/user-icon.png') }}" alt="User Icon"
+                class="user-icon">
               {{ user_name }}
             </a>
           </li>
-          <li><a href="{{url_for('first')}}"><img src="{{ url_for('static', filename='../static/assets/logout.png') }}" alt="User Icon" class="logout-icon"></a></li>
-        </ul>        
+          <li><a href="{{url_for('first')}}"><img src="{{ url_for('static', filename='../static/assets/logout.png') }}"
+                alt="User Icon" class="logout-icon"></a></li>
+        </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
