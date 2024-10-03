@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 # MongoDB connection
-client = MongoClient('mongodb+srv://priya:<db_password>@skin-lesion.upb27.mongodb.net/?retryWrites=true&w=majority&appName=Skin-Lesion')
+client = MongoClient('mongodb+srv://priyadharshini:1234skinlesion@cluster0.upb27.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 db = client['derma_app']  # Database
 users = db['users']  # Collection
 
