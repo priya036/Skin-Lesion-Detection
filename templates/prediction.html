@@ -119,38 +119,42 @@
                             <div class="content">
                                 <h6>Remedy and Care</h4>
                                     <p>
-                                        {% if prediction == 'Actinic Keratosis' %}
-                                    <p><strong>Remedy:</strong> Topical treatments, cryotherapy, photodynamic therapy,
-                                        or laser treatment.</p>
-                                    <p><strong>Care:</strong> Regular use of sunscreen, protective clothing, and regular
-                                        skin checks.</p>
-                                    {% elif prediction == 'Basal Cell Carcinoma' %}
-                                    <p><strong>Remedy:</strong> Surgical removal, topical treatments, radiation therapy,
-                                        or targeted therapies.</p>
-                                    <p><strong>Care:</strong> Regular follow-ups, sun protection, and monitoring for new
-                                        lesions.</p>
-                                    {% elif prediction == 'Benign keratosis-like lesions' %}
-                                    <p><strong>Remedy:</strong> Cryotherapy, curettage, electrosurgery, or laser
-                                        therapy.</p>
-                                    <p><strong>Care:</strong> Gentle skincare, moisturizing, and sun protection.</p>
-                                    {% elif prediction == 'Dermatofibroma' %}
-                                    <p><strong>Remedy:</strong> Surgical excision, cryotherapy, or laser treatment.</p>
-                                    <p><strong>Care:</strong> Avoid trauma to the area, moisturize regularly, and
-                                        monitor for changes.</p>
-                                    {% elif prediction == 'Nevus' %}
-                                    <p><strong>Remedy:</strong> Monitoring for changes, surgical removal if necessary.
-                                    </p>
-                                    <p><strong>Care:</strong> Routine skin checks, sun protection, and avoid picking or
-                                        scratching.</p>
-                                    {% elif prediction == 'Vascular Lesion' %}
-                                    <p><strong>Remedy:</strong> Laser treatment or observation.</p>
-                                    <p><strong>Care:</strong> Avoid trauma, regular check-ups, and gentle skin care.</p>
-                                    {% elif prediction == 'Melanoma' %}
-                                    <p><strong>Remedy:</strong> Surgical removal, immunotherapy, targeted therapy,
-                                        chemotherapy, or radiation therapy.</p>
-                                    <p><strong>Care:</strong> Regular skin checks, sun protection, and follow-up with a
-                                        dermatologist.</p>
-                                    {% endif %}
+                                                {% if prediction == 'Actinic Keratosis' %}
+                                                    <p><strong>Remedy:</strong> Topical treatments, cryotherapy, photodynamic therapy, or laser treatment.</p>
+                                                    <p><strong>Care:</strong> Regular use of sunscreen, protective clothing, and regular skin checks.</p>
+                                                    <p><strong>Rate of Cancer Progression:</strong> Actinic Keratosis can develop into squamous cell carcinoma over several years if left untreated.</p>
+                                                    <p><strong>Risk Rating:</strong> 6/10</p>
+                                                {% elif prediction == 'Basal Cell Carcinoma' %}
+                                                    <p><strong>Remedy:</strong> Surgical removal, topical treatments, radiation therapy, or targeted therapies.</p>
+                                                    <p><strong>Care:</strong> Regular follow-ups, sun protection, and monitoring for new lesions.</p>
+                                                    <p><strong>Rate of Cancer Progression:</strong> Basal Cell Carcinoma is slow-growing and rarely spreads, but it can be locally invasive.</p>
+                                                    <p><strong>Risk Rating:</strong> 5/10</p>
+                                                {% elif prediction == 'Benign keratosis-like lesions' %}
+                                                    <p><strong>Remedy:</strong> Cryotherapy, curettage, electrosurgery, or laser therapy.</p>
+                                                    <p><strong>Care:</strong> Gentle skincare, moisturizing, and sun protection.</p>
+                                                    <p><strong>Rate of Cancer Progression:</strong> These lesions are generally non-cancerous and have a low risk of progression to cancer.</p>
+                                                    <p><strong>Risk Rating:</strong> 2/10</p>
+                                                {% elif prediction == 'Dermatofibroma' %}
+                                                    <p><strong>Remedy:</strong> Surgical excision, cryotherapy, or laser treatment.</p>
+                                                    <p><strong>Care:</strong> Avoid trauma to the area, moisturize regularly, and monitor for changes.</p>
+                                                    <p><strong>Rate of Cancer Progression:</strong> Dermatofibromas are benign and rarely turn into cancer.</p>
+                                                    <p><strong>Risk Rating:</strong> 1/10</p>
+                                                {% elif prediction == 'Nevus' %}
+                                                    <p><strong>Remedy:</strong> Monitoring for changes, surgical removal if necessary.</p>
+                                                    <p><strong>Care:</strong> Routine skin checks, sun protection, and avoid picking or scratching.</p>
+                                                    <p><strong>Rate of Cancer Progression:</strong> Most nevi are benign, but some can transform into melanoma over time.</p>
+                                                    <p><strong>Risk Rating:</strong> 4/10</p>
+                                                {% elif prediction == 'Vascular Lesion' %}
+                                                    <p><strong>Remedy:</strong> Laser treatment or observation.</p>
+                                                    <p><strong>Care:</strong> Avoid trauma, regular check-ups, and gentle skin care.</p>
+                                                    <p><strong>Rate of Cancer Progression:</strong> Vascular lesions are typically benign with no significant risk of becoming cancerous.</p>
+                                                    <p><strong>Risk Rating:</strong> 1/10</p>
+                                                {% elif prediction == 'Melanoma' %}
+                                                    <p><strong>Remedy:</strong> Surgical removal, immunotherapy, targeted therapy, chemotherapy, or radiation therapy.</p>
+                                                    <p><strong>Care:</strong> Regular skin checks, sun protection, and follow-up with a dermatologist.</p>
+                                                    <p><strong>Rate of Cancer Progression:</strong> Melanoma can spread quickly and is the most aggressive form of skin cancer.</p>
+                                                    <p><strong>Risk Rating:</strong> 10/10</p>
+                                                {% endif %}
                                     </p>
                             </div>
                         </div>
