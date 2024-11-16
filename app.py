@@ -2,28 +2,23 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from werkzeug.security import generate_password_hash, check_password_hash
 from pymongo import MongoClient
 import tensorflow as tf
-from tensorflow.keras.models import load_model  # type: ignore
-from tensorflow.keras.preprocessing import image  # type: ignore
-from tensorflow.keras.metrics import AUC  # type: ignore
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
 import numpy as np
 import os
-from flask import url_for
 import certifi
 
+# Initialize Flask app
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+
+# MongoDB client setup
 client = MongoClient(
     "mongodb+srv://aruneshfelix:5799@skin-lesion-detection.3igty.mongodb.net/?retryWrites=true&w=majority&appName=Skin-Lesion-Detection",
     tlsCAFile=certifi.where()
 )
-
-app = Flask(__name__)
-app.secret_key = 'your_secret_key'
-
-db = client['derma_app']  # Database
-users = db['users']  # Collection
-
-# Load the model with custom objects
-dependencies = {'auc_roc': AUC}
-model = load_model('model/skin.h5', custom_objects=dependencies)
+db = client['derma_app']
+users = db['users']
 
 # Define class names for predictions
 verbose_name = {
@@ -36,22 +31,31 @@ verbose_name = {
     6: 'Melanoma',
 }
 
+# Lazy model loading to save memory
+model = None
+
+def load_skin_model():
+    global model
+    if model is None:
+        dependencies = {'auc_roc': tf.keras.metrics.AUC}
+        model = load_model('model/skin.h5', custom_objects=dependencies)
+    return model
+
 # Function to preprocess image and predict label
 def predict_label(img_path):
+    model = load_skin_model()
     try:
         test_image = image.load_img(img_path, target_size=(28, 28))  # Resize to the model input size
         test_image = image.img_to_array(test_image) / 255.0  # Normalize the image
         test_image = np.expand_dims(test_image, axis=0)  # Reshape to fit model input
 
         predictions = model.predict(test_image)
-        predicted_class = np.argmax(predictions, axis=1)[0]  # Get the predicted class index
-
+        predicted_class = np.argmax(predictions, axis=1)[0]
         return verbose_name[predicted_class]
     except Exception as e:
         return f"Error in prediction: {str(e)}"
 
 # Routes for user authentication
-
 @app.route("/signup", methods=['POST'])
 def signup():
     name = request.form['name']
@@ -67,7 +71,6 @@ def signup():
         flash("Passwords do not match.", "error")
         return redirect(url_for('login_page'))
 
-    # Hash the password and store it in the database
     hashed_password = generate_password_hash(password)
     users.insert_one({
         "name" : name,
@@ -76,13 +79,10 @@ def signup():
     })    
     return redirect(url_for('register_success'))
 
-# Login Route
 @app.route("/login", methods=['POST'])
 def login():
     email = request.form['email']
     password = request.form['password']
-
-    # Find the user in the database
     user = users.find_one({"email": email})
 
     if user and check_password_hash(user['password'], password):
@@ -93,7 +93,6 @@ def login():
         flash("Invalid credentials. Please try again.", "error")
         return redirect(url_for('login_page'))
 
-# Log Out Route
 @app.route("/logout")
 def logout():
     session.pop('user', None)
@@ -123,8 +122,7 @@ def index():
         return render_template("index.html", user_name=session['user_name'])
     else:
         return redirect(url_for('first'))
-    
-# Prediction route
+
 @app.route("/submit", methods=['POST'])
 def get_output():
     if request.method == 'POST':
