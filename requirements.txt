@@ -3,5 +3,5 @@ flask
 matplotlib
 pandas
 numpy
-tensorflow
+tensorflow==2.13.0
 pymongo
